@@ -1,7 +1,15 @@
-## UCI SWE295 (Software Visualization) Final Project
-Usage instructions to be added
+# UCI SWE295 (Software Visualization) Final Project
+## Required Python Packages
+- pyvis
+- beautifulsoup4
+- selenium
+You can run `pip install` on all the above package names.
 
-# Team Members:
+## To Run the Visualization
+`$ cd .\data-visualizing\`
+`$ python .\visualize_usage_graph.py`
+
+## Team Members
 - Yirui He
 - Steven Ngo
 - Yu-Jye Tung

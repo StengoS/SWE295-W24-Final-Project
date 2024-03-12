@@ -4,10 +4,6 @@ import os
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 def get_official_name(url, artifact_name):
@@ -83,15 +79,6 @@ def update_data_json(utilized_artifact, usage_list, data_file):
             
             
 def main():
-    # mock_input = "org.apache.logging.log4j/log4j-core"
-    # split_input = mock_input.split("/")
-    # group_name = split_input[0]
-    # artifact_name = split_input[1]
-    # target_url_main = "https://mvnrepository.com/artifact/" + mock_input
-
-    # official_name = get_official_name(target_url_main, artifact_name))
-    # print(official_name)
-
     data_file = "mvn_repo_data.json"
     mock_inputs = ["org.springframework.boot/spring-boot"]
 

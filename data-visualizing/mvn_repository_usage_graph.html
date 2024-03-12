@@ -1,0 +1,591 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+                <link href="lib/tom-select/tom-select.css" rel="stylesheet">
+                <script src="lib/tom-select/tom-select.complete.min.js"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 750px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="org.apache.logging.log4j/log4j-core">org.apache.logging.log4j/log4j-core</option>
+                                
+                                    <option value="org.junit.jupiter/junit-jupiter-engine">org.junit.jupiter/junit-jupiter-engine</option>
+                                
+                                    <option value="commons-logging/commons-logging">commons-logging/commons-logging</option>
+                                
+                                    <option value="org.apache.logging.log4j/log4j-slf4j-impl">org.apache.logging.log4j/log4j-slf4j-impl</option>
+                                
+                                    <option value="org.apache.logging.log4j/log4j-slf4j2-impl">org.apache.logging.log4j/log4j-slf4j2-impl</option>
+                                
+                                    <option value="org.junit.vintage/junit-vintage-engine">org.junit.vintage/junit-vintage-engine</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot">org.springframework.boot/spring-boot</option>
+                                
+                                    <option value="com.zaxxer/HikariCP">com.zaxxer/HikariCP</option>
+                                
+                                    <option value="org.jboss.logging/jboss-logging">org.jboss.logging/jboss-logging</option>
+                                
+                                    <option value="org.apache.spark/spark-core">org.apache.spark/spark-core</option>
+                                
+                                    <option value="org.hibernate.validator/hibernate-validator">org.hibernate.validator/hibernate-validator</option>
+                                
+                                    <option value="redis.clients/jedis">redis.clients/jedis</option>
+                                
+                                    <option value="org.clojure/tools.logging">org.clojure/tools.logging</option>
+                                
+                                    <option value="org.apache.logging.log4j/log4j-1.2-api">org.apache.logging.log4j/log4j-1.2-api</option>
+                                
+                                    <option value="org.apache.camel/camel-core">org.apache.camel/camel-core</option>
+                                
+                                    <option value="org.mybatis/mybatis">org.mybatis/mybatis</option>
+                                
+                                    <option value="org.wso2.carbon/org.wso2.carbon.core">org.wso2.carbon/org.wso2.carbon.core</option>
+                                
+                                    <option value="clj-http/clj-http">clj-http/clj-http</option>
+                                
+                                    <option value="io.vertx/vertx-core">io.vertx/vertx-core</option>
+                                
+                                    <option value="com.alibaba/druid">com.alibaba/druid</option>
+                                
+                                    <option value="io.micrometer/micrometer-core">io.micrometer/micrometer-core</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-devtools">org.springframework.boot/spring-boot-devtools</option>
+                                
+                                    <option value="net.fabricmc/fabric-loader">net.fabricmc/fabric-loader</option>
+                                
+                                    <option value="org.elasticsearch/elasticsearch">org.elasticsearch/elasticsearch</option>
+                                
+                                    <option value="io.netty/netty-common">io.netty/netty-common</option>
+                                
+                                    <option value="org.apache.httpcomponents.client5/httpclient5">org.apache.httpcomponents.client5/httpclient5</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-starter-log4j2">org.springframework.boot/spring-boot-starter-log4j2</option>
+                                
+                                    <option value="org.wso2.carbon/org.wso2.carbon.utils">org.wso2.carbon/org.wso2.carbon.utils</option>
+                                
+                                    <option value="org.apache.logging.log4j/log4j-jcl">org.apache.logging.log4j/log4j-jcl</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-actuator">org.springframework.boot/spring-boot-actuator</option>
+                                
+                                    <option value="org.apache.commons/commons-configuration2">org.apache.commons/commons-configuration2</option>
+                                
+                                    <option value="org.springframework.retry/spring-retry">org.springframework.retry/spring-retry</option>
+                                
+                                    <option value="org.apache.logging.log4j/log4j-web">org.apache.logging.log4j/log4j-web</option>
+                                
+                                    <option value="org.apache.tika/tika-core">org.apache.tika/tika-core</option>
+                                
+                                    <option value="org.apache.hbase/hbase-client">org.apache.hbase/hbase-client</option>
+                                
+                                    <option value="org.apache.xmlbeans/xmlbeans">org.apache.xmlbeans/xmlbeans</option>
+                                
+                                    <option value="org.apache.pdfbox/pdfbox">org.apache.pdfbox/pdfbox</option>
+                                
+                                    <option value="org.wso2.carbon/org.wso2.carbon.registry.core">org.wso2.carbon/org.wso2.carbon.registry.core</option>
+                                
+                                    <option value="org.apache.shiro/shiro-core">org.apache.shiro/shiro-core</option>
+                                
+                                    <option value="org.spigotmc/spigot">org.spigotmc/spigot</option>
+                                
+                                    <option value="org.apache.flink/flink-streaming-java">org.apache.flink/flink-streaming-java</option>
+                                
+                                    <option value="org.assertj/assertj-core">org.assertj/assertj-core</option>
+                                
+                                    <option value="commons-codec/commons-codec">commons-codec/commons-codec</option>
+                                
+                                    <option value="org.apache.logging.log4j/log4j-api">org.apache.logging.log4j/log4j-api</option>
+                                
+                                    <option value="com.h2database/h2">com.h2database/h2</option>
+                                
+                                    <option value="org.junit.jupiter/junit-jupiter">org.junit.jupiter/junit-jupiter</option>
+                                
+                                    <option value="org.junit.jupiter/junit-jupiter-params">org.junit.jupiter/junit-jupiter-params</option>
+                                
+                                    <option value="org.reflections/reflections">org.reflections/reflections</option>
+                                
+                                    <option value="org.apache.httpcomponents/httpclient">org.apache.httpcomponents/httpclient</option>
+                                
+                                    <option value="org.springframework/spring-context">org.springframework/spring-context</option>
+                                
+                                    <option value="org.springframework/spring-test">org.springframework/spring-test</option>
+                                
+                                    <option value="org.springframework/spring-web">org.springframework/spring-web</option>
+                                
+                                    <option value="org.springframework/spring-core">org.springframework/spring-core</option>
+                                
+                                    <option value="org.springframework/spring-beans">org.springframework/spring-beans</option>
+                                
+                                    <option value="org.springframework/spring-webmvc">org.springframework/spring-webmvc</option>
+                                
+                                    <option value="commons-beanutils/commons-beanutils">commons-beanutils/commons-beanutils</option>
+                                
+                                    <option value="org.apache.camel.kafkaconnector/camel-kafka-connector">org.apache.camel.kafkaconnector/camel-kafka-connector</option>
+                                
+                                    <option value="org.apache.activemq/activemq-broker">org.apache.activemq/activemq-broker</option>
+                                
+                                    <option value="org.apache.jena/jena-arq">org.apache.jena/jena-arq</option>
+                                
+                                    <option value="org.apache.activemq/activemq-client">org.apache.activemq/activemq-client</option>
+                                
+                                    <option value="org.apache.solr/solr-core">org.apache.solr/solr-core</option>
+                                
+                                    <option value="org.apache.shiro/shiro-web">org.apache.shiro/shiro-web</option>
+                                
+                                    <option value="com.fasterxml.jackson.core/jackson-databind">com.fasterxml.jackson.core/jackson-databind</option>
+                                
+                                    <option value="com.fasterxml.jackson.core/jackson-core">com.fasterxml.jackson.core/jackson-core</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-starter-test">org.springframework.boot/spring-boot-starter-test</option>
+                                
+                                    <option value="org.easymock/easymock">org.easymock/easymock</option>
+                                
+                                    <option value="commons-cli/commons-cli">commons-cli/commons-cli</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-autoconfigure">org.springframework.boot/spring-boot-autoconfigure</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-starter">org.springframework.boot/spring-boot-starter</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-test">org.springframework.boot/spring-boot-test</option>
+                                
+                                    <option value="io.github.classgraph/classgraph">io.github.classgraph/classgraph</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-properties-migrator">org.springframework.boot/spring-boot-properties-migrator</option>
+                                
+                                    <option value="org.apache.camel/camel-spring-boot-starter">org.apache.camel/camel-spring-boot-starter</option>
+                                
+                                    <option value="org.apache.camel.springboot/camel-spring-boot-starter">org.apache.camel.springboot/camel-spring-boot-starter</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-util-api">org.apereo.cas/cas-server-core-util-api</option>
+                                
+                                    <option value="org.apache.camel.springboot/camel-core-starter">org.apache.camel.springboot/camel-core-starter</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-configuration-api">org.apereo.cas/cas-server-core-configuration-api</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-authentication-api">org.apereo.cas/cas-server-core-authentication-api</option>
+                                
+                                    <option value="org.apache.camel/camel-core-starter">org.apache.camel/camel-core-starter</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-api-test-category">org.apereo.cas/cas-server-core-api-test-category</option>
+                                
+                                    <option value="com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery">com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-actuator-autoconfigure">org.springframework.boot/spring-boot-actuator-autoconfigure</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-util">org.apereo.cas/cas-server-core-util</option>
+                                
+                                    <option value="com.alibaba/easyexcel">com.alibaba/easyexcel</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-services">org.apereo.cas/cas-server-core-services</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-configuration">org.apereo.cas/cas-server-core-configuration</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-web-api">org.apereo.cas/cas-server-core-web-api</option>
+                                
+                                    <option value="com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config">com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-test-autoconfigure">org.springframework.boot/spring-boot-test-autoconfigure</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-authentication">org.apereo.cas/cas-server-core-authentication</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-services-api">org.apereo.cas/cas-server-core-services-api</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-web">org.apereo.cas/cas-server-core-web</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-tickets">org.apereo.cas/cas-server-core-tickets</option>
+                                
+                                    <option value="io.pivotal.cfenv/java-cfenv-boot">io.pivotal.cfenv/java-cfenv-boot</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-webflow">org.apereo.cas/cas-server-core-webflow</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-services-authentication">org.apereo.cas/cas-server-core-services-authentication</option>
+                                
+                                    <option value="org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure">org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core">org.apereo.cas/cas-server-core</option>
+                                
+                                    <option value="org.grails/grails-core">org.grails/grails-core</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-webflow-api">org.apereo.cas/cas-server-core-webflow-api</option>
+                                
+                                    <option value="com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel">com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-logout">org.apereo.cas/cas-server-core-logout</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-authentication-attributes">org.apereo.cas/cas-server-core-authentication-attributes</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-tickets-api">org.apereo.cas/cas-server-core-tickets-api</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-logout-api">org.apereo.cas/cas-server-core-logout-api</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-support-person-directory">org.apereo.cas/cas-server-support-person-directory</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-services-registry">org.apereo.cas/cas-server-core-services-registry</option>
+                                
+                                    <option value="org.springframework.cloud/spring-cloud-netflix-core">org.springframework.cloud/spring-cloud-netflix-core</option>
+                                
+                                    <option value="org.springframework.cloud/spring-cloud-netflix-hystrix">org.springframework.cloud/spring-cloud-netflix-hystrix</option>
+                                
+                                    <option value="org.webjars/webjars-locator-core">org.webjars/webjars-locator-core</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-api-authentication">org.apereo.cas/cas-server-core-api-authentication</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-cookie">org.apereo.cas/cas-server-core-cookie</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-cookie-api">org.apereo.cas/cas-server-core-cookie-api</option>
+                                
+                                    <option value="org.apereo.cas/cas-server-core-audit-api">org.apereo.cas/cas-server-core-audit-api</option>
+                                
+                                    <option value="com.github.liaomengge/base-common-utils">com.github.liaomengge/base-common-utils</option>
+                                
+                                    <option value="org.quartz-scheduler/quartz">org.quartz-scheduler/quartz</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-starter-jdbc">org.springframework.boot/spring-boot-starter-jdbc</option>
+                                
+                                    <option value="org.mariadb.jdbc/mariadb-java-client">org.mariadb.jdbc/mariadb-java-client</option>
+                                
+                                    <option value="com.microsoft.sqlserver/mssql-jdbc">com.microsoft.sqlserver/mssql-jdbc</option>
+                                
+                                    <option value="org.sakaiproject.kernel/sakai-kernel-api">org.sakaiproject.kernel/sakai-kernel-api</option>
+                                
+                                    <option value="org.hibernate/hibernate-core">org.hibernate/hibernate-core</option>
+                                
+                                    <option value="org.hibernate.orm/hibernate-core">org.hibernate.orm/hibernate-core</option>
+                                
+                                    <option value="org.hibernate/hibernate-validator">org.hibernate/hibernate-validator</option>
+                                
+                                    <option value="org.hibernate/hibernate-entitymanager">org.hibernate/hibernate-entitymanager</option>
+                                
+                                    <option value="org.jboss.logging/jboss-logging-processor">org.jboss.logging/jboss-logging-processor</option>
+                                
+                                    <option value="org.jboss.resteasy/resteasy-jaxrs">org.jboss.resteasy/resteasy-jaxrs</option>
+                                
+                                    <option value="io.netty/netty">io.netty/netty</option>
+                                
+                                    <option value="io.netty/netty-all">io.netty/netty-all</option>
+                                
+                                    <option value="org.jboss.logging/jboss-logging-annotations">org.jboss.logging/jboss-logging-annotations</option>
+                                
+                                    <option value="org.apache.commons/commons-dbcp2">org.apache.commons/commons-dbcp2</option>
+                                
+                                    <option value="org.ops4j.pax.logging/pax-logging-api">org.ops4j.pax.logging/pax-logging-api</option>
+                                
+                                    <option value="org.apache.spark/spark-sql">org.apache.spark/spark-sql</option>
+                                
+                                    <option value="org.apache.spark/spark-mllib">org.apache.spark/spark-mllib</option>
+                                
+                                    <option value="org.apache.spark/spark-streaming">org.apache.spark/spark-streaming</option>
+                                
+                                    <option value="org.apache.hive/hive-exec">org.apache.hive/hive-exec</option>
+                                
+                                    <option value="org.apache.spark/spark-hive">org.apache.spark/spark-hive</option>
+                                
+                                    <option value="org.apache.spark/spark-catalyst">org.apache.spark/spark-catalyst</option>
+                                
+                                    <option value="org.apache.hive/hive-common">org.apache.hive/hive-common</option>
+                                
+                                    <option value="org.apache.spark/spark-avro">org.apache.spark/spark-avro</option>
+                                
+                                    <option value="org.apache.spark/spark-graphx">org.apache.spark/spark-graphx</option>
+                                
+                                    <option value="org.apache.spark/spark-sql-kafka-0-10">org.apache.spark/spark-sql-kafka-0-10</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-starter-web">org.springframework.boot/spring-boot-starter-web</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-starter-validation">org.springframework.boot/spring-boot-starter-validation</option>
+                                
+                                    <option value="org.springframework.boot/spring-boot-starter-webflux">org.springframework.boot/spring-boot-starter-webflux</option>
+                                
+                                    <option value="org.springframework.data/spring-data-mongodb">org.springframework.data/spring-data-mongodb</option>
+                                
+                                    <option value="com.atlassian.plugins.rest/atlassian-rest-common">com.atlassian.plugins.rest/atlassian-rest-common</option>
+                                
+                                    <option value="io.dropwizard/dropwizard-core">io.dropwizard/dropwizard-core</option>
+                                
+                                    <option value="com.atlassian.confluence/confluence">com.atlassian.confluence/confluence</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.logging.log4j/log4j-core", "label": "org.apache.logging.log4j/log4j-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.junit.jupiter/junit-jupiter-engine", "label": "org.junit.jupiter/junit-jupiter-engine", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "commons-logging/commons-logging", "label": "commons-logging/commons-logging", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.logging.log4j/log4j-slf4j-impl", "label": "org.apache.logging.log4j/log4j-slf4j-impl", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.logging.log4j/log4j-slf4j2-impl", "label": "org.apache.logging.log4j/log4j-slf4j2-impl", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.junit.vintage/junit-vintage-engine", "label": "org.junit.vintage/junit-vintage-engine", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot", "label": "org.springframework.boot/spring-boot", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.zaxxer/HikariCP", "label": "com.zaxxer/HikariCP", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.jboss.logging/jboss-logging", "label": "org.jboss.logging/jboss-logging", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-core", "label": "org.apache.spark/spark-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.hibernate.validator/hibernate-validator", "label": "org.hibernate.validator/hibernate-validator", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "redis.clients/jedis", "label": "redis.clients/jedis", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.clojure/tools.logging", "label": "org.clojure/tools.logging", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.logging.log4j/log4j-1.2-api", "label": "org.apache.logging.log4j/log4j-1.2-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.camel/camel-core", "label": "org.apache.camel/camel-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.mybatis/mybatis", "label": "org.mybatis/mybatis", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.wso2.carbon/org.wso2.carbon.core", "label": "org.wso2.carbon/org.wso2.carbon.core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "clj-http/clj-http", "label": "clj-http/clj-http", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.vertx/vertx-core", "label": "io.vertx/vertx-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.alibaba/druid", "label": "com.alibaba/druid", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.micrometer/micrometer-core", "label": "io.micrometer/micrometer-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-devtools", "label": "org.springframework.boot/spring-boot-devtools", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "net.fabricmc/fabric-loader", "label": "net.fabricmc/fabric-loader", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.elasticsearch/elasticsearch", "label": "org.elasticsearch/elasticsearch", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.netty/netty-common", "label": "io.netty/netty-common", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.httpcomponents.client5/httpclient5", "label": "org.apache.httpcomponents.client5/httpclient5", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-starter-log4j2", "label": "org.springframework.boot/spring-boot-starter-log4j2", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.wso2.carbon/org.wso2.carbon.utils", "label": "org.wso2.carbon/org.wso2.carbon.utils", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.logging.log4j/log4j-jcl", "label": "org.apache.logging.log4j/log4j-jcl", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-actuator", "label": "org.springframework.boot/spring-boot-actuator", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.commons/commons-configuration2", "label": "org.apache.commons/commons-configuration2", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.retry/spring-retry", "label": "org.springframework.retry/spring-retry", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.logging.log4j/log4j-web", "label": "org.apache.logging.log4j/log4j-web", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.tika/tika-core", "label": "org.apache.tika/tika-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.hbase/hbase-client", "label": "org.apache.hbase/hbase-client", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.xmlbeans/xmlbeans", "label": "org.apache.xmlbeans/xmlbeans", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.pdfbox/pdfbox", "label": "org.apache.pdfbox/pdfbox", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.wso2.carbon/org.wso2.carbon.registry.core", "label": "org.wso2.carbon/org.wso2.carbon.registry.core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.shiro/shiro-core", "label": "org.apache.shiro/shiro-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.spigotmc/spigot", "label": "org.spigotmc/spigot", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.flink/flink-streaming-java", "label": "org.apache.flink/flink-streaming-java", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.assertj/assertj-core", "label": "org.assertj/assertj-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "commons-codec/commons-codec", "label": "commons-codec/commons-codec", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.logging.log4j/log4j-api", "label": "org.apache.logging.log4j/log4j-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.h2database/h2", "label": "com.h2database/h2", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.junit.jupiter/junit-jupiter", "label": "org.junit.jupiter/junit-jupiter", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.junit.jupiter/junit-jupiter-params", "label": "org.junit.jupiter/junit-jupiter-params", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.reflections/reflections", "label": "org.reflections/reflections", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.httpcomponents/httpclient", "label": "org.apache.httpcomponents/httpclient", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework/spring-context", "label": "org.springframework/spring-context", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework/spring-test", "label": "org.springframework/spring-test", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework/spring-web", "label": "org.springframework/spring-web", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework/spring-core", "label": "org.springframework/spring-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework/spring-beans", "label": "org.springframework/spring-beans", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework/spring-webmvc", "label": "org.springframework/spring-webmvc", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "commons-beanutils/commons-beanutils", "label": "commons-beanutils/commons-beanutils", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.camel.kafkaconnector/camel-kafka-connector", "label": "org.apache.camel.kafkaconnector/camel-kafka-connector", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.activemq/activemq-broker", "label": "org.apache.activemq/activemq-broker", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.jena/jena-arq", "label": "org.apache.jena/jena-arq", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.activemq/activemq-client", "label": "org.apache.activemq/activemq-client", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.solr/solr-core", "label": "org.apache.solr/solr-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.shiro/shiro-web", "label": "org.apache.shiro/shiro-web", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.fasterxml.jackson.core/jackson-databind", "label": "com.fasterxml.jackson.core/jackson-databind", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.fasterxml.jackson.core/jackson-core", "label": "com.fasterxml.jackson.core/jackson-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-starter-test", "label": "org.springframework.boot/spring-boot-starter-test", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.easymock/easymock", "label": "org.easymock/easymock", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "commons-cli/commons-cli", "label": "commons-cli/commons-cli", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-autoconfigure", "label": "org.springframework.boot/spring-boot-autoconfigure", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-starter", "label": "org.springframework.boot/spring-boot-starter", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-test", "label": "org.springframework.boot/spring-boot-test", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.github.classgraph/classgraph", "label": "io.github.classgraph/classgraph", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-properties-migrator", "label": "org.springframework.boot/spring-boot-properties-migrator", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.camel/camel-spring-boot-starter", "label": "org.apache.camel/camel-spring-boot-starter", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.camel.springboot/camel-spring-boot-starter", "label": "org.apache.camel.springboot/camel-spring-boot-starter", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-util-api", "label": "org.apereo.cas/cas-server-core-util-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.camel.springboot/camel-core-starter", "label": "org.apache.camel.springboot/camel-core-starter", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-configuration-api", "label": "org.apereo.cas/cas-server-core-configuration-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-authentication-api", "label": "org.apereo.cas/cas-server-core-authentication-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.camel/camel-core-starter", "label": "org.apache.camel/camel-core-starter", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-api-test-category", "label": "org.apereo.cas/cas-server-core-api-test-category", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery", "label": "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-actuator-autoconfigure", "label": "org.springframework.boot/spring-boot-actuator-autoconfigure", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-util", "label": "org.apereo.cas/cas-server-core-util", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.alibaba/easyexcel", "label": "com.alibaba/easyexcel", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-services", "label": "org.apereo.cas/cas-server-core-services", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-configuration", "label": "org.apereo.cas/cas-server-core-configuration", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-web-api", "label": "org.apereo.cas/cas-server-core-web-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config", "label": "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-test-autoconfigure", "label": "org.springframework.boot/spring-boot-test-autoconfigure", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-authentication", "label": "org.apereo.cas/cas-server-core-authentication", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-services-api", "label": "org.apereo.cas/cas-server-core-services-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-web", "label": "org.apereo.cas/cas-server-core-web", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-tickets", "label": "org.apereo.cas/cas-server-core-tickets", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.pivotal.cfenv/java-cfenv-boot", "label": "io.pivotal.cfenv/java-cfenv-boot", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-webflow", "label": "org.apereo.cas/cas-server-core-webflow", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-services-authentication", "label": "org.apereo.cas/cas-server-core-services-authentication", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure", "label": "org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core", "label": "org.apereo.cas/cas-server-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.grails/grails-core", "label": "org.grails/grails-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-webflow-api", "label": "org.apereo.cas/cas-server-core-webflow-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel", "label": "com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-logout", "label": "org.apereo.cas/cas-server-core-logout", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-authentication-attributes", "label": "org.apereo.cas/cas-server-core-authentication-attributes", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-tickets-api", "label": "org.apereo.cas/cas-server-core-tickets-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-logout-api", "label": "org.apereo.cas/cas-server-core-logout-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-support-person-directory", "label": "org.apereo.cas/cas-server-support-person-directory", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-services-registry", "label": "org.apereo.cas/cas-server-core-services-registry", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.cloud/spring-cloud-netflix-core", "label": "org.springframework.cloud/spring-cloud-netflix-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.cloud/spring-cloud-netflix-hystrix", "label": "org.springframework.cloud/spring-cloud-netflix-hystrix", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.webjars/webjars-locator-core", "label": "org.webjars/webjars-locator-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-api-authentication", "label": "org.apereo.cas/cas-server-core-api-authentication", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-cookie", "label": "org.apereo.cas/cas-server-core-cookie", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-cookie-api", "label": "org.apereo.cas/cas-server-core-cookie-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apereo.cas/cas-server-core-audit-api", "label": "org.apereo.cas/cas-server-core-audit-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.github.liaomengge/base-common-utils", "label": "com.github.liaomengge/base-common-utils", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.quartz-scheduler/quartz", "label": "org.quartz-scheduler/quartz", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-starter-jdbc", "label": "org.springframework.boot/spring-boot-starter-jdbc", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.mariadb.jdbc/mariadb-java-client", "label": "org.mariadb.jdbc/mariadb-java-client", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.microsoft.sqlserver/mssql-jdbc", "label": "com.microsoft.sqlserver/mssql-jdbc", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.sakaiproject.kernel/sakai-kernel-api", "label": "org.sakaiproject.kernel/sakai-kernel-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.hibernate/hibernate-core", "label": "org.hibernate/hibernate-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.hibernate.orm/hibernate-core", "label": "org.hibernate.orm/hibernate-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.hibernate/hibernate-validator", "label": "org.hibernate/hibernate-validator", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.hibernate/hibernate-entitymanager", "label": "org.hibernate/hibernate-entitymanager", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.jboss.logging/jboss-logging-processor", "label": "org.jboss.logging/jboss-logging-processor", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.jboss.resteasy/resteasy-jaxrs", "label": "org.jboss.resteasy/resteasy-jaxrs", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.netty/netty", "label": "io.netty/netty", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.netty/netty-all", "label": "io.netty/netty-all", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.jboss.logging/jboss-logging-annotations", "label": "org.jboss.logging/jboss-logging-annotations", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.commons/commons-dbcp2", "label": "org.apache.commons/commons-dbcp2", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.ops4j.pax.logging/pax-logging-api", "label": "org.ops4j.pax.logging/pax-logging-api", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-sql", "label": "org.apache.spark/spark-sql", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-mllib", "label": "org.apache.spark/spark-mllib", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-streaming", "label": "org.apache.spark/spark-streaming", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.hive/hive-exec", "label": "org.apache.hive/hive-exec", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-hive", "label": "org.apache.spark/spark-hive", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-catalyst", "label": "org.apache.spark/spark-catalyst", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.hive/hive-common", "label": "org.apache.hive/hive-common", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-avro", "label": "org.apache.spark/spark-avro", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-graphx", "label": "org.apache.spark/spark-graphx", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.apache.spark/spark-sql-kafka-0-10", "label": "org.apache.spark/spark-sql-kafka-0-10", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-starter-web", "label": "org.springframework.boot/spring-boot-starter-web", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-starter-validation", "label": "org.springframework.boot/spring-boot-starter-validation", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.boot/spring-boot-starter-webflux", "label": "org.springframework.boot/spring-boot-starter-webflux", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "org.springframework.data/spring-data-mongodb", "label": "org.springframework.data/spring-data-mongodb", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.atlassian.plugins.rest/atlassian-rest-common", "label": "com.atlassian.plugins.rest/atlassian-rest-common", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "io.dropwizard/dropwizard-core", "label": "io.dropwizard/dropwizard-core", "shape": "dot"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "com.atlassian.confluence/confluence", "label": "com.atlassian.confluence/confluence", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.junit.jupiter/junit-jupiter-engine"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "commons-logging/commons-logging"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.logging.log4j/log4j-slf4j-impl"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.logging.log4j/log4j-slf4j2-impl"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.junit.vintage/junit-vintage-engine"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.springframework.boot/spring-boot"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "com.zaxxer/HikariCP"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "com.zaxxer/HikariCP"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.jboss.logging/jboss-logging"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.spark/spark-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.hibernate.validator/hibernate-validator"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "redis.clients/jedis"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.clojure/tools.logging"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.logging.log4j/log4j-1.2-api"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.camel/camel-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.mybatis/mybatis"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.wso2.carbon/org.wso2.carbon.core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "clj-http/clj-http"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "io.vertx/vertx-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "com.alibaba/druid"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "io.micrometer/micrometer-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.springframework.boot/spring-boot-devtools"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "net.fabricmc/fabric-loader"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.elasticsearch/elasticsearch"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "io.netty/netty-common"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.httpcomponents.client5/httpclient5"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.springframework.boot/spring-boot-starter-log4j2"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.wso2.carbon/org.wso2.carbon.utils"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.logging.log4j/log4j-jcl"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.springframework.boot/spring-boot-actuator"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.commons/commons-configuration2"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.springframework.retry/spring-retry"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.logging.log4j/log4j-web"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.tika/tika-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.hbase/hbase-client"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.xmlbeans/xmlbeans"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.pdfbox/pdfbox"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.wso2.carbon/org.wso2.carbon.registry.core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.shiro/shiro-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.spigotmc/spigot"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-core", "to": "org.apache.flink/flink-streaming-java"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.assertj/assertj-core"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "commons-codec/commons-codec"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.apache.logging.log4j/log4j-core"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.apache.logging.log4j/log4j-api"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "com.h2database/h2"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.junit.jupiter/junit-jupiter"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.apache.logging.log4j/log4j-slf4j-impl"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.apache.logging.log4j/log4j-slf4j2-impl"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.junit.jupiter/junit-jupiter-params"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.reflections/reflections"}, {"arrows": "to", "from": "org.junit.jupiter/junit-jupiter-engine", "to": "org.junit.vintage/junit-vintage-engine"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.apache.httpcomponents/httpclient"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.apache.httpcomponents.client5/httpclient5"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.springframework/spring-context"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.apache.logging.log4j/log4j-core"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.springframework/spring-test"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.springframework/spring-web"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "com.h2database/h2"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.springframework/spring-core"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.springframework/spring-beans"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "org.springframework/spring-webmvc"}, {"arrows": "to", "from": "commons-logging/commons-logging", "to": "commons-beanutils/commons-beanutils"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "com.zaxxer/HikariCP"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.apache.spark/spark-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "redis.clients/jedis"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.apache.camel/camel-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.apache.httpcomponents.client5/httpclient5"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.springframework.boot/spring-boot-starter-log4j2"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.springframework.boot/spring-boot-actuator"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.apache.tika/tika-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.apache.hbase/hbase-client"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j-impl", "to": "org.apache.shiro/shiro-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.spark/spark-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.springframework.boot/spring-boot-starter-log4j2"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.tika/tika-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.shiro/shiro-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.camel.kafkaconnector/camel-kafka-connector"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.activemq/activemq-broker"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.jena/jena-arq"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.activemq/activemq-client"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.solr/solr-core"}, {"arrows": "to", "from": "org.apache.logging.log4j/log4j-slf4j2-impl", "to": "org.apache.shiro/shiro-web"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "com.fasterxml.jackson.core/jackson-databind"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "org.assertj/assertj-core"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "com.fasterxml.jackson.core/jackson-core"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "org.springframework.boot/spring-boot-starter-test"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "commons-logging/commons-logging"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "org.apache.logging.log4j/log4j-core"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "org.apache.logging.log4j/log4j-api"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "org.apache.logging.log4j/log4j-slf4j-impl"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "org.apache.logging.log4j/log4j-slf4j2-impl"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "org.easymock/easymock"}, {"arrows": "to", "from": "org.junit.vintage/junit-vintage-engine", "to": "commons-cli/commons-cli"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-starter-test"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-autoconfigure"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-starter"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-devtools"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-actuator"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-test"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "io.github.classgraph/classgraph"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-properties-migrator"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apache.camel/camel-spring-boot-starter"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apache.camel.springboot/camel-spring-boot-starter"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-util-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apache.camel.springboot/camel-core-starter"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-configuration-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-authentication-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apache.camel/camel-core-starter"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-api-test-category"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-actuator-autoconfigure"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-util"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "com.alibaba/easyexcel"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-services"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-configuration"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-web-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.boot/spring-boot-test-autoconfigure"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-authentication"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-services-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-web"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-tickets"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "io.pivotal.cfenv/java-cfenv-boot"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-webflow"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-services-authentication"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.grails/grails-core"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-webflow-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-logout"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-authentication-attributes"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-tickets-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-logout-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-support-person-directory"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-services-registry"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.cloud/spring-cloud-netflix-core"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.springframework.cloud/spring-cloud-netflix-hystrix"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.webjars/webjars-locator-core"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-api-authentication"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-cookie"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-cookie-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "org.apereo.cas/cas-server-core-audit-api"}, {"arrows": "to", "from": "org.springframework.boot/spring-boot", "to": "com.github.liaomengge/base-common-utils"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.springframework.boot/spring-boot-autoconfigure"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.springframework.boot/spring-boot"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.quartz-scheduler/quartz"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.springframework.boot/spring-boot-starter-jdbc"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.springframework.boot/spring-boot-devtools"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.springframework.boot/spring-boot-actuator"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.mariadb.jdbc/mariadb-java-client"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "com.microsoft.sqlserver/mssql-jdbc"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.sakaiproject.kernel/sakai-kernel-api"}, {"arrows": "to", "from": "com.zaxxer/HikariCP", "to": "org.apereo.cas/cas-server-core-util-api"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.hibernate/hibernate-core"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.hibernate.orm/hibernate-core"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.hibernate/hibernate-validator"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.hibernate.validator/hibernate-validator"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.hibernate/hibernate-entitymanager"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.jboss.logging/jboss-logging-processor"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.jboss.resteasy/resteasy-jaxrs"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "io.netty/netty"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "io.netty/netty-all"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.jboss.logging/jboss-logging-annotations"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.apache.commons/commons-dbcp2"}, {"arrows": "to", "from": "org.jboss.logging/jboss-logging", "to": "org.ops4j.pax.logging/pax-logging-api"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-sql"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-mllib"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-streaming"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.hive/hive-exec"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-hive"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-catalyst"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.hive/hive-common"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-avro"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-graphx"}, {"arrows": "to", "from": "org.apache.spark/spark-core", "to": "org.apache.spark/spark-sql-kafka-0-10"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "org.springframework.boot/spring-boot-starter-web"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "org.springframework.boot/spring-boot-autoconfigure"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "org.springframework.boot/spring-boot"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "org.springframework.boot/spring-boot-starter-validation"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "org.springframework.boot/spring-boot-starter-webflux"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "org.springframework.boot/spring-boot-actuator"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "org.springframework.data/spring-data-mongodb"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "com.atlassian.plugins.rest/atlassian-rest-common"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "io.dropwizard/dropwizard-core"}, {"arrows": "to", "from": "org.hibernate.validator/hibernate-validator", "to": "com.atlassian.confluence/confluence"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
