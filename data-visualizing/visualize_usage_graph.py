@@ -9,9 +9,12 @@ def create_network(repo_data):
                   select_menu=True)
 
     for artifact in repo_data.keys():
-        net.add_node(artifact, label=artifact)
-        for dependency in repo_data[artifact]:
-            net.add_node(dependency, label=dependency)
+        if repo_data[artifact]["has_associated_CVE"]:
+            net.add_node(artifact, label=artifact, color="#a20707")
+        else:
+            net.add_node(artifact, label=artifact)
+    for artifact in repo_data.keys():
+        for dependency in repo_data[artifact]["used_by"]:
             net.add_edge(artifact, dependency)
 
     net.show_buttons()

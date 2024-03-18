@@ -1,348 +1,792 @@
 {
-    "org.apache.logging.log4j/log4j-core": [
-        "org.junit.jupiter/junit-jupiter-engine",
-        "commons-logging/commons-logging",
-        "org.apache.logging.log4j/log4j-slf4j-impl",
-        "org.apache.logging.log4j/log4j-slf4j2-impl",
-        "org.junit.vintage/junit-vintage-engine",
-        "org.springframework.boot/spring-boot",
-        "com.zaxxer/HikariCP",
-        "com.zaxxer/HikariCP",
-        "org.jboss.logging/jboss-logging",
-        "org.apache.spark/spark-core",
-        "org.hibernate.validator/hibernate-validator",
-        "redis.clients/jedis",
-        "org.clojure/tools.logging",
-        "org.apache.logging.log4j/log4j-1.2-api",
-        "org.apache.camel/camel-core",
-        "org.mybatis/mybatis",
-        "org.wso2.carbon/org.wso2.carbon.core",
-        "clj-http/clj-http",
-        "io.vertx/vertx-core",
-        "com.alibaba/druid",
-        "io.micrometer/micrometer-core",
-        "org.springframework.boot/spring-boot-devtools",
-        "net.fabricmc/fabric-loader",
-        "org.elasticsearch/elasticsearch",
-        "io.netty/netty-common",
-        "org.apache.httpcomponents.client5/httpclient5",
-        "org.springframework.boot/spring-boot-starter-log4j2",
-        "org.wso2.carbon/org.wso2.carbon.utils",
-        "org.apache.logging.log4j/log4j-jcl",
-        "org.springframework.boot/spring-boot-actuator",
-        "org.apache.commons/commons-configuration2",
-        "org.springframework.retry/spring-retry",
-        "org.apache.logging.log4j/log4j-web",
-        "org.apache.tika/tika-core",
-        "org.apache.hbase/hbase-client",
-        "org.apache.xmlbeans/xmlbeans",
-        "org.apache.pdfbox/pdfbox",
-        "org.wso2.carbon/org.wso2.carbon.registry.core",
-        "org.apache.shiro/shiro-core",
-        "org.spigotmc/spigot",
-        "org.apache.flink/flink-streaming-java"
-    ],
-    "org.junit.jupiter/junit-jupiter-engine": [
-        "org.assertj/assertj-core",
-        "commons-codec/commons-codec",
-        "org.apache.logging.log4j/log4j-core",
-        "org.apache.logging.log4j/log4j-api",
-        "com.h2database/h2",
-        "org.junit.jupiter/junit-jupiter",
-        "org.apache.logging.log4j/log4j-slf4j-impl",
-        "org.apache.logging.log4j/log4j-slf4j2-impl",
-        "org.junit.jupiter/junit-jupiter-params",
-        "org.reflections/reflections",
-        "org.junit.vintage/junit-vintage-engine"
-    ],
-    "commons-logging/commons-logging": [
-        "org.apache.httpcomponents/httpclient",
-        "org.apache.httpcomponents.client5/httpclient5",
-        "org.springframework/spring-context",
-        "org.apache.logging.log4j/log4j-core",
-        "org.springframework/spring-test",
-        "org.springframework/spring-web",
-        "com.h2database/h2",
-        "org.springframework/spring-core",
-        "org.springframework/spring-beans",
-        "org.springframework/spring-webmvc",
-        "commons-beanutils/commons-beanutils"
-    ],
-    "org.apache.logging.log4j/log4j-slf4j-impl": [
-        "com.zaxxer/HikariCP",
-        "org.apache.spark/spark-core",
-        "redis.clients/jedis",
-        "org.apache.camel/camel-core",
-        "org.apache.httpcomponents.client5/httpclient5",
-        "org.springframework.boot/spring-boot-starter-log4j2",
-        "org.springframework.boot/spring-boot-actuator",
-        "org.apache.tika/tika-core",
-        "org.apache.hbase/hbase-client",
-        "org.apache.shiro/shiro-core"
-    ],
-    "org.apache.logging.log4j/log4j-slf4j2-impl": [
-        "org.apache.spark/spark-core",
-        "org.springframework.boot/spring-boot-starter-log4j2",
-        "org.apache.tika/tika-core",
-        "org.apache.shiro/shiro-core",
-        "org.apache.camel.kafkaconnector/camel-kafka-connector",
-        "org.apache.activemq/activemq-broker",
-        "org.apache.jena/jena-arq",
-        "org.apache.activemq/activemq-client",
-        "org.apache.solr/solr-core",
-        "org.apache.shiro/shiro-web"
-    ],
-    "org.junit.vintage/junit-vintage-engine": [
-        "com.fasterxml.jackson.core/jackson-databind",
-        "org.assertj/assertj-core",
-        "com.fasterxml.jackson.core/jackson-core",
-        "org.springframework.boot/spring-boot-starter-test",
-        "commons-logging/commons-logging",
-        "org.apache.logging.log4j/log4j-core",
-        "org.apache.logging.log4j/log4j-api",
-        "org.apache.logging.log4j/log4j-slf4j-impl",
-        "org.apache.logging.log4j/log4j-slf4j2-impl",
-        "org.easymock/easymock",
-        "commons-cli/commons-cli"
-    ],
-    "org.springframework.boot/spring-boot": [
-        "org.springframework.boot/spring-boot-starter-test",
-        "org.springframework.boot/spring-boot-autoconfigure",
-        "org.springframework.boot/spring-boot-starter",
-        "org.springframework.boot/spring-boot-devtools",
-        "org.springframework.boot/spring-boot-actuator",
-        "org.springframework.boot/spring-boot-test",
-        "io.github.classgraph/classgraph",
-        "org.springframework.boot/spring-boot-properties-migrator",
-        "org.apache.camel/camel-spring-boot-starter",
-        "org.apache.camel.springboot/camel-spring-boot-starter",
-        "org.apereo.cas/cas-server-core-util-api",
-        "org.apache.camel.springboot/camel-core-starter",
-        "org.apereo.cas/cas-server-core-configuration-api",
-        "org.apereo.cas/cas-server-core-authentication-api",
-        "org.apache.camel/camel-core-starter",
-        "org.apereo.cas/cas-server-core-api-test-category",
-        "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery",
-        "org.springframework.boot/spring-boot-actuator-autoconfigure",
-        "org.apereo.cas/cas-server-core-util",
-        "com.alibaba/easyexcel",
-        "org.apereo.cas/cas-server-core-services",
-        "org.apereo.cas/cas-server-core-configuration",
-        "org.apereo.cas/cas-server-core-web-api",
-        "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config",
-        "org.springframework.boot/spring-boot-test-autoconfigure",
-        "org.apereo.cas/cas-server-core-authentication",
-        "org.apereo.cas/cas-server-core-services-api",
-        "org.apereo.cas/cas-server-core-web",
-        "org.apereo.cas/cas-server-core-tickets",
-        "io.pivotal.cfenv/java-cfenv-boot",
-        "org.apereo.cas/cas-server-core-webflow",
-        "org.apereo.cas/cas-server-core-services-authentication",
-        "org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure",
-        "org.apereo.cas/cas-server-core",
-        "org.grails/grails-core",
-        "org.apereo.cas/cas-server-core-webflow-api",
-        "com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel",
-        "org.apereo.cas/cas-server-core-logout",
-        "org.apereo.cas/cas-server-core-authentication-attributes",
-        "org.apereo.cas/cas-server-core-tickets-api",
-        "org.apereo.cas/cas-server-core-logout-api",
-        "org.apereo.cas/cas-server-support-person-directory",
-        "org.apereo.cas/cas-server-core-services-registry",
-        "org.springframework.cloud/spring-cloud-netflix-core",
-        "org.springframework.cloud/spring-cloud-netflix-hystrix",
-        "org.webjars/webjars-locator-core",
-        "org.apereo.cas/cas-server-core-api-authentication",
-        "org.apereo.cas/cas-server-core-cookie",
-        "org.apereo.cas/cas-server-core-cookie-api",
-        "org.apereo.cas/cas-server-core-audit-api",
-        "com.github.liaomengge/base-common-utils"
-    ],
-    "com.zaxxer/HikariCP": [
-        "org.springframework.boot/spring-boot-autoconfigure",
-        "org.springframework.boot/spring-boot",
-        "org.quartz-scheduler/quartz",
-        "org.springframework.boot/spring-boot-starter-jdbc",
-        "org.springframework.boot/spring-boot-devtools",
-        "org.springframework.boot/spring-boot-actuator",
-        "org.mariadb.jdbc/mariadb-java-client",
-        "com.microsoft.sqlserver/mssql-jdbc",
-        "org.sakaiproject.kernel/sakai-kernel-api",
-        "org.apereo.cas/cas-server-core-util-api"
-    ],
-    "org.jboss.logging/jboss-logging": [
-        "org.hibernate/hibernate-core",
-        "org.hibernate.orm/hibernate-core",
-        "org.hibernate/hibernate-validator",
-        "org.hibernate.validator/hibernate-validator",
-        "org.hibernate/hibernate-entitymanager",
-        "org.jboss.logging/jboss-logging-processor",
-        "org.jboss.resteasy/resteasy-jaxrs",
-        "io.netty/netty",
-        "io.netty/netty-all",
-        "org.jboss.logging/jboss-logging-annotations",
-        "org.apache.commons/commons-dbcp2",
-        "org.ops4j.pax.logging/pax-logging-api"
-    ],
-    "org.apache.spark/spark-core": [
-        "org.apache.spark/spark-sql",
-        "org.apache.spark/spark-mllib",
-        "org.apache.spark/spark-streaming",
-        "org.apache.hive/hive-exec",
-        "org.apache.spark/spark-hive",
-        "org.apache.spark/spark-catalyst",
-        "org.apache.hive/hive-common",
-        "org.apache.spark/spark-avro",
-        "org.apache.spark/spark-graphx",
-        "org.apache.spark/spark-sql-kafka-0-10"
-    ],
-    "org.hibernate.validator/hibernate-validator": [
-        "org.springframework.boot/spring-boot-starter-web",
-        "org.springframework.boot/spring-boot-autoconfigure",
-        "org.springframework.boot/spring-boot",
-        "org.springframework.boot/spring-boot-starter-validation",
-        "org.springframework.boot/spring-boot-starter-webflux",
-        "org.springframework.boot/spring-boot-actuator",
-        "org.springframework.data/spring-data-mongodb",
-        "com.atlassian.plugins.rest/atlassian-rest-common",
-        "io.dropwizard/dropwizard-core",
-        "com.atlassian.confluence/confluence"
-    ],
-    "redis.clients/jedis": [],
-    "org.clojure/tools.logging": [],
-    "org.apache.logging.log4j/log4j-1.2-api": [],
-    "org.apache.camel/camel-core": [],
-    "org.mybatis/mybatis": [],
-    "org.wso2.carbon/org.wso2.carbon.core": [],
-    "clj-http/clj-http": [],
-    "io.vertx/vertx-core": [],
-    "com.alibaba/druid": [],
-    "io.micrometer/micrometer-core": [],
-    "org.springframework.boot/spring-boot-devtools": [],
-    "net.fabricmc/fabric-loader": [],
-    "org.elasticsearch/elasticsearch": [],
-    "io.netty/netty-common": [],
-    "org.apache.httpcomponents.client5/httpclient5": [],
-    "org.springframework.boot/spring-boot-starter-log4j2": [],
-    "org.wso2.carbon/org.wso2.carbon.utils": [],
-    "org.apache.logging.log4j/log4j-jcl": [],
-    "org.springframework.boot/spring-boot-actuator": [],
-    "org.apache.commons/commons-configuration2": [],
-    "org.springframework.retry/spring-retry": [],
-    "org.apache.logging.log4j/log4j-web": [],
-    "org.apache.tika/tika-core": [],
-    "org.apache.hbase/hbase-client": [],
-    "org.apache.xmlbeans/xmlbeans": [],
-    "org.apache.pdfbox/pdfbox": [],
-    "org.wso2.carbon/org.wso2.carbon.registry.core": [],
-    "org.apache.shiro/shiro-core": [],
-    "org.spigotmc/spigot": [],
-    "org.apache.flink/flink-streaming-java": [],
-    "org.assertj/assertj-core": [],
-    "commons-codec/commons-codec": [],
-    "org.apache.logging.log4j/log4j-api": [],
-    "com.h2database/h2": [],
-    "org.junit.jupiter/junit-jupiter": [],
-    "org.junit.jupiter/junit-jupiter-params": [],
-    "org.reflections/reflections": [],
-    "org.springframework.boot/spring-boot-starter-test": [],
-    "org.springframework.boot/spring-boot-autoconfigure": [],
-    "org.springframework.boot/spring-boot-starter": [],
-    "org.springframework.boot/spring-boot-test": [],
-    "io.github.classgraph/classgraph": [],
-    "org.springframework.boot/spring-boot-properties-migrator": [],
-    "org.apache.camel/camel-spring-boot-starter": [],
-    "org.apache.camel.springboot/camel-spring-boot-starter": [],
-    "org.apereo.cas/cas-server-core-util-api": [],
-    "org.apache.httpcomponents/httpclient": [],
-    "org.springframework/spring-context": [],
-    "org.springframework/spring-test": [],
-    "org.springframework/spring-web": [],
-    "org.springframework/spring-core": [],
-    "org.springframework/spring-beans": [],
-    "org.springframework/spring-webmvc": [],
-    "commons-beanutils/commons-beanutils": [],
-    "org.apache.camel.kafkaconnector/camel-kafka-connector": [],
-    "org.apache.activemq/activemq-broker": [],
-    "org.apache.jena/jena-arq": [],
-    "org.apache.activemq/activemq-client": [],
-    "org.apache.solr/solr-core": [],
-    "org.apache.shiro/shiro-web": [],
-    "com.fasterxml.jackson.core/jackson-databind": [],
-    "com.fasterxml.jackson.core/jackson-core": [],
-    "org.easymock/easymock": [],
-    "commons-cli/commons-cli": [],
-    "org.quartz-scheduler/quartz": [],
-    "org.springframework.boot/spring-boot-starter-jdbc": [],
-    "org.mariadb.jdbc/mariadb-java-client": [],
-    "com.microsoft.sqlserver/mssql-jdbc": [],
-    "org.sakaiproject.kernel/sakai-kernel-api": [],
-    "org.hibernate/hibernate-core": [],
-    "org.hibernate.orm/hibernate-core": [],
-    "org.hibernate/hibernate-validator": [],
-    "org.hibernate/hibernate-entitymanager": [],
-    "org.jboss.logging/jboss-logging-processor": [],
-    "org.jboss.resteasy/resteasy-jaxrs": [],
-    "io.netty/netty": [],
-    "io.netty/netty-all": [],
-    "org.jboss.logging/jboss-logging-annotations": [],
-    "org.apache.commons/commons-dbcp2": [],
-    "org.ops4j.pax.logging/pax-logging-api": [],
-    "org.apache.spark/spark-sql": [],
-    "org.apache.spark/spark-mllib": [],
-    "org.apache.spark/spark-streaming": [],
-    "org.apache.hive/hive-exec": [],
-    "org.apache.spark/spark-hive": [],
-    "org.apache.spark/spark-catalyst": [],
-    "org.apache.hive/hive-common": [],
-    "org.apache.spark/spark-avro": [],
-    "org.apache.spark/spark-graphx": [],
-    "org.apache.spark/spark-sql-kafka-0-10": [],
-    "org.springframework.boot/spring-boot-starter-web": [],
-    "org.springframework.boot/spring-boot-starter-validation": [],
-    "org.springframework.boot/spring-boot-starter-webflux": [],
-    "org.springframework.data/spring-data-mongodb": [],
-    "com.atlassian.plugins.rest/atlassian-rest-common": [],
-    "io.dropwizard/dropwizard-core": [],
-    "com.atlassian.confluence/confluence": [],
-    "org.apache.camel.springboot/camel-core-starter": [],
-    "org.apereo.cas/cas-server-core-configuration-api": [],
-    "org.apereo.cas/cas-server-core-authentication-api": [],
-    "org.apache.camel/camel-core-starter": [],
-    "org.apereo.cas/cas-server-core-api-test-category": [],
-    "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery": [],
-    "org.springframework.boot/spring-boot-actuator-autoconfigure": [],
-    "org.apereo.cas/cas-server-core-util": [],
-    "com.alibaba/easyexcel": [],
-    "org.apereo.cas/cas-server-core-services": [],
-    "org.apereo.cas/cas-server-core-configuration": [],
-    "org.apereo.cas/cas-server-core-web-api": [],
-    "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config": [],
-    "org.springframework.boot/spring-boot-test-autoconfigure": [],
-    "org.apereo.cas/cas-server-core-authentication": [],
-    "org.apereo.cas/cas-server-core-services-api": [],
-    "org.apereo.cas/cas-server-core-web": [],
-    "org.apereo.cas/cas-server-core-tickets": [],
-    "io.pivotal.cfenv/java-cfenv-boot": [],
-    "org.apereo.cas/cas-server-core-webflow": [],
-    "org.apereo.cas/cas-server-core-services-authentication": [],
-    "org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure": [],
-    "org.apereo.cas/cas-server-core": [],
-    "org.grails/grails-core": [],
-    "org.apereo.cas/cas-server-core-webflow-api": [],
-    "com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel": [],
-    "org.apereo.cas/cas-server-core-logout": [],
-    "org.apereo.cas/cas-server-core-authentication-attributes": [],
-    "org.apereo.cas/cas-server-core-tickets-api": [],
-    "org.apereo.cas/cas-server-core-logout-api": [],
-    "org.apereo.cas/cas-server-support-person-directory": [],
-    "org.apereo.cas/cas-server-core-services-registry": [],
-    "org.springframework.cloud/spring-cloud-netflix-core": [],
-    "org.springframework.cloud/spring-cloud-netflix-hystrix": [],
-    "org.webjars/webjars-locator-core": [],
-    "org.apereo.cas/cas-server-core-api-authentication": [],
-    "org.apereo.cas/cas-server-core-cookie": [],
-    "org.apereo.cas/cas-server-core-cookie-api": [],
-    "org.apereo.cas/cas-server-core-audit-api": [],
-    "com.github.liaomengge/base-common-utils": []
+    "org.apache.logging.log4j/log4j-core": {
+        "used_by": [
+            "org.junit.jupiter/junit-jupiter-engine",
+            "commons-logging/commons-logging",
+            "org.apache.logging.log4j/log4j-slf4j-impl",
+            "org.apache.logging.log4j/log4j-slf4j2-impl",
+            "org.junit.vintage/junit-vintage-engine",
+            "org.springframework.boot/spring-boot",
+            "com.zaxxer/HikariCP",
+            "com.zaxxer/HikariCP",
+            "org.jboss.logging/jboss-logging",
+            "org.apache.spark/spark-core",
+            "org.hibernate.validator/hibernate-validator",
+            "redis.clients/jedis",
+            "org.clojure/tools.logging",
+            "org.apache.logging.log4j/log4j-1.2-api",
+            "org.apache.camel/camel-core",
+            "org.mybatis/mybatis",
+            "org.wso2.carbon/org.wso2.carbon.core",
+            "clj-http/clj-http",
+            "io.vertx/vertx-core",
+            "com.alibaba/druid",
+            "io.micrometer/micrometer-core",
+            "org.springframework.boot/spring-boot-devtools",
+            "net.fabricmc/fabric-loader",
+            "org.elasticsearch/elasticsearch",
+            "io.netty/netty-common",
+            "org.apache.httpcomponents.client5/httpclient5",
+            "org.springframework.boot/spring-boot-starter-log4j2",
+            "org.wso2.carbon/org.wso2.carbon.utils",
+            "org.apache.logging.log4j/log4j-jcl",
+            "org.springframework.boot/spring-boot-actuator",
+            "org.apache.commons/commons-configuration2",
+            "org.springframework.retry/spring-retry",
+            "org.apache.logging.log4j/log4j-web",
+            "org.apache.tika/tika-core",
+            "org.apache.hbase/hbase-client",
+            "org.apache.xmlbeans/xmlbeans",
+            "org.apache.pdfbox/pdfbox",
+            "org.wso2.carbon/org.wso2.carbon.registry.core",
+            "org.apache.shiro/shiro-core",
+            "org.spigotmc/spigot",
+            "org.apache.flink/flink-streaming-java"
+        ],
+        "has_associated_CVE": true
+    },
+    "org.junit.jupiter/junit-jupiter-engine": {
+        "used_by": [
+            "org.assertj/assertj-core",
+            "commons-codec/commons-codec",
+            "org.apache.logging.log4j/log4j-core",
+            "org.apache.logging.log4j/log4j-api",
+            "com.h2database/h2",
+            "org.junit.jupiter/junit-jupiter",
+            "org.apache.logging.log4j/log4j-slf4j-impl",
+            "org.apache.logging.log4j/log4j-slf4j2-impl",
+            "org.junit.jupiter/junit-jupiter-params",
+            "org.reflections/reflections",
+            "org.junit.vintage/junit-vintage-engine"
+        ],
+        "has_associated_CVE": false
+    },
+    "commons-logging/commons-logging": {
+        "used_by": [
+            "org.apache.httpcomponents/httpclient",
+            "org.apache.httpcomponents.client5/httpclient5",
+            "org.springframework/spring-context",
+            "org.apache.logging.log4j/log4j-core",
+            "org.springframework/spring-test",
+            "org.springframework/spring-web",
+            "com.h2database/h2",
+            "org.springframework/spring-core",
+            "org.springframework/spring-beans",
+            "org.springframework/spring-webmvc",
+            "commons-beanutils/commons-beanutils"
+        ],
+        "has_associated_CVE": false
+    },
+    "org.apache.logging.log4j/log4j-slf4j-impl": {
+        "used_by": [
+            "com.zaxxer/HikariCP",
+            "org.apache.spark/spark-core",
+            "redis.clients/jedis",
+            "org.apache.camel/camel-core",
+            "org.apache.httpcomponents.client5/httpclient5",
+            "org.springframework.boot/spring-boot-starter-log4j2",
+            "org.springframework.boot/spring-boot-actuator",
+            "org.apache.tika/tika-core",
+            "org.apache.hbase/hbase-client",
+            "org.apache.shiro/shiro-core"
+        ],
+        "has_associated_CVE": false
+    },
+    "org.apache.logging.log4j/log4j-slf4j2-impl": {
+        "used_by": [
+            "org.apache.spark/spark-core",
+            "org.springframework.boot/spring-boot-starter-log4j2",
+            "org.apache.tika/tika-core",
+            "org.apache.shiro/shiro-core",
+            "org.apache.camel.kafkaconnector/camel-kafka-connector",
+            "org.apache.activemq/activemq-broker",
+            "org.apache.jena/jena-arq",
+            "org.apache.activemq/activemq-client",
+            "org.apache.solr/solr-core",
+            "org.apache.shiro/shiro-web"
+        ],
+        "has_associated_CVE": false
+    },
+    "org.junit.vintage/junit-vintage-engine": {
+        "used_by": [
+            "com.fasterxml.jackson.core/jackson-databind",
+            "org.assertj/assertj-core",
+            "com.fasterxml.jackson.core/jackson-core",
+            "org.springframework.boot/spring-boot-starter-test",
+            "commons-logging/commons-logging",
+            "org.apache.logging.log4j/log4j-core",
+            "org.apache.logging.log4j/log4j-api",
+            "org.apache.logging.log4j/log4j-slf4j-impl",
+            "org.apache.logging.log4j/log4j-slf4j2-impl",
+            "org.easymock/easymock",
+            "commons-cli/commons-cli"
+        ],
+        "has_associated_CVE": false
+    },
+    "org.springframework.boot/spring-boot": {
+        "used_by": [
+            "org.springframework.boot/spring-boot-starter-test",
+            "org.springframework.boot/spring-boot-autoconfigure",
+            "org.springframework.boot/spring-boot-starter",
+            "org.springframework.boot/spring-boot-devtools",
+            "org.springframework.boot/spring-boot-actuator",
+            "org.springframework.boot/spring-boot-test",
+            "io.github.classgraph/classgraph",
+            "org.springframework.boot/spring-boot-properties-migrator",
+            "org.apache.camel/camel-spring-boot-starter",
+            "org.apache.camel.springboot/camel-spring-boot-starter",
+            "org.apereo.cas/cas-server-core-util-api",
+            "org.apache.camel.springboot/camel-core-starter",
+            "org.apereo.cas/cas-server-core-configuration-api",
+            "org.apereo.cas/cas-server-core-authentication-api",
+            "org.apache.camel/camel-core-starter",
+            "org.apereo.cas/cas-server-core-api-test-category",
+            "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery",
+            "org.springframework.boot/spring-boot-actuator-autoconfigure",
+            "org.apereo.cas/cas-server-core-util",
+            "com.alibaba/easyexcel",
+            "org.apereo.cas/cas-server-core-services",
+            "org.apereo.cas/cas-server-core-configuration",
+            "org.apereo.cas/cas-server-core-web-api",
+            "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config",
+            "org.springframework.boot/spring-boot-test-autoconfigure",
+            "org.apereo.cas/cas-server-core-authentication",
+            "org.apereo.cas/cas-server-core-services-api",
+            "org.apereo.cas/cas-server-core-web",
+            "org.apereo.cas/cas-server-core-tickets",
+            "io.pivotal.cfenv/java-cfenv-boot",
+            "org.apereo.cas/cas-server-core-webflow",
+            "org.apereo.cas/cas-server-core-services-authentication",
+            "org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure",
+            "org.apereo.cas/cas-server-core",
+            "org.grails/grails-core",
+            "org.apereo.cas/cas-server-core-webflow-api",
+            "com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel",
+            "org.apereo.cas/cas-server-core-logout",
+            "org.apereo.cas/cas-server-core-authentication-attributes",
+            "org.apereo.cas/cas-server-core-tickets-api",
+            "org.apereo.cas/cas-server-core-logout-api",
+            "org.apereo.cas/cas-server-support-person-directory",
+            "org.apereo.cas/cas-server-core-services-registry",
+            "org.springframework.cloud/spring-cloud-netflix-core",
+            "org.springframework.cloud/spring-cloud-netflix-hystrix",
+            "org.webjars/webjars-locator-core",
+            "org.apereo.cas/cas-server-core-api-authentication",
+            "org.apereo.cas/cas-server-core-cookie",
+            "org.apereo.cas/cas-server-core-cookie-api",
+            "org.apereo.cas/cas-server-core-audit-api",
+            "com.github.liaomengge/base-common-utils"
+        ],
+        "has_associated_CVE": true
+    },
+    "com.zaxxer/HikariCP": {
+        "used_by": [
+            "org.springframework.boot/spring-boot-autoconfigure",
+            "org.springframework.boot/spring-boot",
+            "org.quartz-scheduler/quartz",
+            "org.springframework.boot/spring-boot-starter-jdbc",
+            "org.springframework.boot/spring-boot-devtools",
+            "org.springframework.boot/spring-boot-actuator",
+            "org.mariadb.jdbc/mariadb-java-client",
+            "com.microsoft.sqlserver/mssql-jdbc",
+            "org.sakaiproject.kernel/sakai-kernel-api",
+            "org.apereo.cas/cas-server-core-util-api"
+        ],
+        "has_associated_CVE": false
+    },
+    "org.jboss.logging/jboss-logging": {
+        "used_by": [
+            "org.hibernate/hibernate-core",
+            "org.hibernate.orm/hibernate-core",
+            "org.hibernate/hibernate-validator",
+            "org.hibernate.validator/hibernate-validator",
+            "org.hibernate/hibernate-entitymanager",
+            "org.jboss.logging/jboss-logging-processor",
+            "org.jboss.resteasy/resteasy-jaxrs",
+            "io.netty/netty",
+            "io.netty/netty-all",
+            "org.jboss.logging/jboss-logging-annotations",
+            "org.apache.commons/commons-dbcp2",
+            "org.ops4j.pax.logging/pax-logging-api"
+        ],
+        "has_associated_CVE": false
+    },
+    "org.apache.spark/spark-core": {
+        "used_by": [
+            "org.apache.spark/spark-sql",
+            "org.apache.spark/spark-mllib",
+            "org.apache.spark/spark-streaming",
+            "org.apache.hive/hive-exec",
+            "org.apache.spark/spark-hive",
+            "org.apache.spark/spark-catalyst",
+            "org.apache.hive/hive-common",
+            "org.apache.spark/spark-avro",
+            "org.apache.spark/spark-graphx",
+            "org.apache.spark/spark-sql-kafka-0-10"
+        ],
+        "has_associated_CVE": true
+    },
+    "org.hibernate.validator/hibernate-validator": {
+        "used_by": [
+            "org.springframework.boot/spring-boot-starter-web",
+            "org.springframework.boot/spring-boot-autoconfigure",
+            "org.springframework.boot/spring-boot",
+            "org.springframework.boot/spring-boot-starter-validation",
+            "org.springframework.boot/spring-boot-starter-webflux",
+            "org.springframework.boot/spring-boot-actuator",
+            "org.springframework.data/spring-data-mongodb",
+            "com.atlassian.plugins.rest/atlassian-rest-common",
+            "io.dropwizard/dropwizard-core",
+            "com.atlassian.confluence/confluence"
+        ],
+        "has_associated_CVE": true
+    },
+    "redis.clients/jedis": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.clojure/tools.logging": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.apache.logging.log4j/log4j-1.2-api": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.apache.camel/camel-core": {
+        "used_by": [],
+        "has_associated_CVE": true
+    },
+    "org.mybatis/mybatis": {
+        "used_by": [],
+        "has_associated_CVE": true
+    },
+    "org.wso2.carbon/org.wso2.carbon.core": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "clj-http/clj-http": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "io.vertx/vertx-core": {
+        "used_by": [],
+        "has_associated_CVE": true
+    },
+    "com.alibaba/druid": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "io.micrometer/micrometer-core": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.springframework.boot/spring-boot-devtools": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "net.fabricmc/fabric-loader": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.elasticsearch/elasticsearch": {
+        "used_by": [],
+        "has_associated_CVE": true
+    },
+    "io.netty/netty-common": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.apache.httpcomponents.client5/httpclient5": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.springframework.boot/spring-boot-starter-log4j2": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.wso2.carbon/org.wso2.carbon.utils": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.apache.logging.log4j/log4j-jcl": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.springframework.boot/spring-boot-actuator": {
+        "used_by": [],
+        "has_associated_CVE": false
+    },
+    "org.apache.commons/commons-configuration2": {
+        "used_by": [],
+        "has_associated_CVE": true
+    },
+    "org.springframework.retry/spring-retry": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.logging.log4j/log4j-web": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.tika/tika-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.hbase/hbase-client": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.xmlbeans/xmlbeans": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.pdfbox/pdfbox": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.wso2.carbon/org.wso2.carbon.registry.core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.shiro/shiro-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.spigotmc/spigot": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.flink/flink-streaming-java": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.assertj/assertj-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "commons-codec/commons-codec": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.logging.log4j/log4j-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.h2database/h2": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.junit.jupiter/junit-jupiter": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.junit.jupiter/junit-jupiter-params": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.reflections/reflections": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-starter-test": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-autoconfigure": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-starter": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-test": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "io.github.classgraph/classgraph": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-properties-migrator": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.camel/camel-spring-boot-starter": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.camel.springboot/camel-spring-boot-starter": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-util-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.httpcomponents/httpclient": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework/spring-context": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework/spring-test": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework/spring-web": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework/spring-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework/spring-beans": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework/spring-webmvc": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "commons-beanutils/commons-beanutils": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.camel.kafkaconnector/camel-kafka-connector": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.activemq/activemq-broker": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.jena/jena-arq": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.activemq/activemq-client": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.solr/solr-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.shiro/shiro-web": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.fasterxml.jackson.core/jackson-databind": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.fasterxml.jackson.core/jackson-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.easymock/easymock": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "commons-cli/commons-cli": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.quartz-scheduler/quartz": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-starter-jdbc": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.mariadb.jdbc/mariadb-java-client": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.microsoft.sqlserver/mssql-jdbc": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.sakaiproject.kernel/sakai-kernel-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.hibernate/hibernate-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.hibernate.orm/hibernate-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.hibernate/hibernate-validator": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.hibernate/hibernate-entitymanager": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.jboss.logging/jboss-logging-processor": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.jboss.resteasy/resteasy-jaxrs": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "io.netty/netty": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "io.netty/netty-all": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.jboss.logging/jboss-logging-annotations": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.commons/commons-dbcp2": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.ops4j.pax.logging/pax-logging-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-sql": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-mllib": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-streaming": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.hive/hive-exec": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-hive": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-catalyst": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.hive/hive-common": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-avro": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-graphx": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.spark/spark-sql-kafka-0-10": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-starter-web": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-starter-validation": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-starter-webflux": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.data/spring-data-mongodb": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.atlassian.plugins.rest/atlassian-rest-common": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "io.dropwizard/dropwizard-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.atlassian.confluence/confluence": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.camel.springboot/camel-core-starter": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-configuration-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-authentication-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apache.camel/camel-core-starter": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-api-test-category": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-actuator-autoconfigure": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-util": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.alibaba/easyexcel": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-services": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-configuration": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-web-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.boot/spring-boot-test-autoconfigure": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-authentication": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-services-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-web": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-tickets": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "io.pivotal.cfenv/java-cfenv-boot": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-webflow": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-services-authentication": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.grails/grails-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-webflow-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.alibaba.cloud/spring-cloud-starter-alibaba-sentinel": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-logout": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-authentication-attributes": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-tickets-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-logout-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-support-person-directory": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-services-registry": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.cloud/spring-cloud-netflix-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.springframework.cloud/spring-cloud-netflix-hystrix": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.webjars/webjars-locator-core": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-api-authentication": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-cookie": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-cookie-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "org.apereo.cas/cas-server-core-audit-api": {
+        "used_by": [],
+        "has_associated_CVE": null
+    },
+    "com.github.liaomengge/base-common-utils": {
+        "used_by": [],
+        "has_associated_CVE": null
+    }
 }

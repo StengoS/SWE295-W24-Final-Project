@@ -68,32 +68,65 @@ def update_data_json(utilized_artifact, usage_list, data_file):
         data = json.load(repo_data)
 
     for artifact in usage_list:
-        if artifact != utilized_artifact and artifact not in data[utilized_artifact]:
-            data[utilized_artifact].append(artifact)
+        if artifact != utilized_artifact and artifact not in data[utilized_artifact]["used_by"]:
+            data[utilized_artifact]["used_by"].append(artifact)
         if artifact not in data.keys():
-            data[artifact] = []
+            data[artifact] = {
+                "used_by": [],
+                "has_associated_CVE": False
+            }
 
     with open(data_file, "w") as write_file:
         json.dump(data, write_file, indent=4)
 
+
+def update_data_vulns_exist(data_file):
+    data = {}
+    with open(data_file) as repo_data:
+        data = json.load(repo_data)
+
+    artifacts_list = list(data.keys())
+    for artifact in artifacts_list:
+        if data[artifact]["has_associated_CVE"] is None:
+            print("Currently checking " + artifact + "...")
+
+            driver = webdriver.Chrome()
+            target_url = "https://mvnrepository.com/artifact/" + artifact
+            driver.get(target_url)
             
+        
+            soup = BeautifulSoup(driver.page_source, "html.parser")
+            html_output = soup.prettify()
+
+            if "vulnerability" in html_output or "vulnerabilities" in html_output:
+                data[artifact]["has_associated_CVE"] = True
+            else:
+                data[artifact]["has_associated_CVE"] = False
             
+            driver.quit()
+
+            with open(data_file, "w") as write_file:
+                json.dump(data, write_file, indent=4)
+
+
 def main():
     data_file = "mvn_repo_data.json"
-    mock_inputs = ["org.springframework.boot/spring-boot"]
+    # mock_inputs = ["org.springframework.boot/spring-boot"]
 
-    for artifact in mock_inputs:
-        for i in range(2, 6):
-            target_url_usages = "https://mvnrepository.com/artifact/" + artifact + "/usages?p=" + str(i)
-            usages_pg_html = "usages_page_test.html"
-            get_usages(target_url_usages, usages_pg_html)
-            time.sleep(3)
+    # for artifact in mock_inputs:
+    #     for i in range(2, 6):
+    #         target_url_usages = "https://mvnrepository.com/artifact/" + artifact + "/usages?p=" + str(i)
+    #         usages_pg_html = "usages_page_test.html"
+    #         get_usages(target_url_usages, usages_pg_html)
+    #         time.sleep(3)
 
-            usage_list = scrape_usages_from_html(usages_pg_html)
-            print(usage_list)
-            update_data_json(artifact, usage_list, data_file)
-            if os.path.exists(usages_pg_html):
-                os.remove(usages_pg_html)
+    #         usage_list = scrape_usages_from_html(usages_pg_html)
+    #         print(usage_list)
+    #         update_data_json(artifact, usage_list, data_file)
+    #         if os.path.exists(usages_pg_html):
+    #             os.remove(usages_pg_html)
+
+    update_data_vulns_exist(data_file)
 
 
 if __name__ == "__main__":
